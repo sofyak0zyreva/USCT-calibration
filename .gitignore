@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.benchmarks/
+build/
+dist/
+*.egg-info/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Data and results never go into git (raw data is several GB)
+data/
+results/
+*.bin
+*.mat
