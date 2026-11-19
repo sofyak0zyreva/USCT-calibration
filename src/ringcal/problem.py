@@ -123,6 +123,20 @@ class CalibrationProblem:
         """Elements that fired or listened, sorted. Only these can be calibrated."""
         return np.union1d(self.tx_elements, self.rx_elements)
 
+    def flight_times(self, positions: NDArray[np.float64]) -> NDArray[np.float64]:
+        """Pure travel times |x_tx - x_rx| / c for given element positions.
+
+        ``positions`` has shape ``(n_elements, 2)``, indexed by element number;
+        the result has shape ``(n_tx, n_rx)``, like ``times``.
+        """
+        x = np.asarray(positions, dtype=np.float64)
+        if x.shape != (self.geometry.n_elements, 2):
+            raise ValueError(
+                f"positions has shape {x.shape}, expected ({self.geometry.n_elements}, 2)"
+            )
+        diff = x[self.tx_elements][:, None, :] - x[self.rx_elements][None, :, :]
+        return np.linalg.norm(diff, axis=-1) / self.c
+
     def without_elements(self, elements: Iterable[int]) -> CalibrationProblem:
         """A copy with every row and column of ``elements`` masked out.
 
