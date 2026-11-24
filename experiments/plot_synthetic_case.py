@@ -69,4 +69,3 @@ if __name__ == "__main__":
         seed=int(args[1]) if len(args) > 1 else 0,
         output=args[2] if len(args) > 2 else "synthetic_case.png",
     )
-    

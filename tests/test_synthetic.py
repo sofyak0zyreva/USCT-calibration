@@ -121,4 +121,3 @@ def test_magnitudes_match_the_paper() -> None:
 def test_too_few_sensors_raises() -> None:
     with pytest.raises(ValueError):
         paper_case(2, rng=0)
-        
